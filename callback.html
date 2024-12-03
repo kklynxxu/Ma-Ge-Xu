@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddit OAuth Callback</title>
+</head>
+<body>
+    <h1>Reddit OAuth Callback</h1>
+    <p>Authorization code: <span id="auth-code"></span></p>
+
+    <script>
+        // 获取 URL 中的查询参数
+        function getQueryParams() {
+            var params = {};
+            window.location.search.substr(1).split("&").forEach(function (pair) {
+                var [key, value] = pair.split("=");
+                params[key] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+        // 将授权码显示到页面上
+        var params = getQueryParams();
+        if (params.code) {
+            document.getElementById("auth-code").textContent = params.code;
+        } else {
+            document.getElementById("auth-code").textContent = "No authorization code received.";
+        }
+    </script>
+</body>
+</html>
